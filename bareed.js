@@ -72,11 +72,7 @@ class Person {
     this.wallet = new Wallet(0)
   };
   moveTo = location => {
-    this.x = location.x
-    this.y = location.y 
-    this.location.x = this.x
-    this.location.y = this.y
-    // return this.location = new Point (location.x, location.y)
+    return this.location = location
   };
 }
 
@@ -148,8 +144,12 @@ class Customer extends Person {
   requestIceCream = (vendor, numberOfIceCreams) => {
     if (this._isInRange(vendor) && this._haveEnoughMoney(vendor, numberOfIceCreams)){
       return vendor.sellTo(this,numberOfIceCreams)
-    } else {
-      return console.log("Transaction couldn't be completed")
+    } else if (!this._isInRange(vendor)){
+      return console.log("Transaction couldn't be completed, you're out of range")
+    } else if (!this._haveEnoughMoney(vendor, numberOfIceCreams)){
+      return console.log("Transaction couldn't be completed, you're card got declined")
+    } else{
+
     }
   }
 
